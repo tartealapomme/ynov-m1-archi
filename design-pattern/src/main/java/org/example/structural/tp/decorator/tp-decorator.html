@@ -1,0 +1,72 @@
+
+		<head>
+			<style type="text/css" media="screen">
+				body,html{font-family:var(--markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, "Ubuntu", "Droid Sans", sans-serif);font-size:var(--markdown-font-size,14px);padding:0 26px;line-height:var(--markdown-line-height,22px);word-wrap:break-word}body{padding-top:1em}h1,h2,h3,h4,h5,h6,ol,p,pre,ul{margin-top:0}h2,h3,h4,h5,h6{font-weight:400;margin-bottom:.2em}img{max-width:100%;max-height:100%}a{text-decoration:none}a:hover{text-decoration:underline}a:focus,input:focus,select:focus,textarea:focus{outline:1px solid -webkit-focus-ring-color;outline-offset:-1px}p{margin-bottom:.7em}ol,ul{margin-bottom:.7em}hr{border:0;height:2px;border-bottom:2px solid}h1{padding-bottom:.3em;line-height:1.2;border-bottom-width:1px;border-bottom-style:solid;font-weight:400}table{border-collapse:collapse}th{text-align:left;border-bottom:1px solid}td,th{padding:5px 10px}table>tbody>tr+tr>td{border-top:1px solid}blockquote{margin:0 7px 0 5px;padding:0 16px 0 10px;border-left-width:5px;border-left-style:solid}code{font-family:var(--vscode-editor-font-family, "SF Mono", Monaco, Menlo, Consolas, "Ubuntu Mono", "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace);font-size:1em;line-height:1.357em}body.wordWrap pre{white-space:pre-wrap}pre.hljs code>div,pre:not(.hljs){padding:16px;border-radius:3px;overflow:auto}pre code{color:var(--vscode-editor-foreground);tab-size:4}
+			</style>
+		</head>
+		<body>
+			<h2 id="exercice--enrichissement-dynamique-dun-service-de-notification">Exercice : Enrichissement dynamique d’un service de notification</h2>
+<hr>
+<h2 id="contexte">Contexte</h2>
+<p>Vous travaillez sur une application métier qui envoie des <strong>notifications</strong> aux utilisateurs.
+À l’origine, l’application envoie uniquement des notifications <strong>simples</strong> (texte brut).</p>
+<p>Avec l’évolution du produit, de nouvelles exigences apparaissent :</p>
+<ul>
+<li>journaliser certaines notifications,</li>
+<li>chiffrer le contenu avant envoi,</li>
+<li>mesurer le temps d’envoi,</li>
+<li>combiner ces fonctionnalités selon les besoins.</li>
+</ul>
+<p>Ces fonctionnalités doivent pouvoir être <strong>ajoutées ou retirées dynamiquement</strong>, sans modifier le service de notification existant et sans multiplier les sous-classes.</p>
+<hr>
+<h2 id="problématique">Problématique</h2>
+<p>Le service de notification doit rester :</p>
+<ul>
+<li>simple,</li>
+<li>stable,</li>
+<li>centré uniquement sur son rôle principal : envoyer une notification.</li>
+</ul>
+<p>Les fonctionnalités supplémentaires (log, chiffrement, métriques, etc.) ne doivent pas être intégrées directement dans le service principal.</p>
+<hr>
+<h2 id="objectif">Objectif</h2>
+<p>Mettre en place une solution basée sur le <strong>design pattern Decorator</strong> permettant d’enrichir dynamiquement le comportement d’un service de notification.</p>
+<hr>
+<h2 id="description-des-éléments">Description des éléments</h2>
+<p>Le système repose sur :</p>
+<ul>
+<li>un <strong>service de notification</strong> chargé d’envoyer un message,</li>
+<li>plusieurs fonctionnalités optionnelles pouvant enrichir ce service,</li>
+<li>un client qui utilise le service de notification sans connaître les décorateurs appliqués.</li>
+</ul>
+<p>Le service de notification de base :</p>
+<ul>
+<li>envoie un message à un destinataire,</li>
+<li>ne gère ni log, ni sécurité, ni mesure de performance.</li>
+</ul>
+<hr>
+<h2 id="travail-demandé">Travail demandé</h2>
+<ol>
+<li><p>Concevoir un service de notification de base.</p>
+</li>
+<li><p>Mettre en place un ou plusieurs <strong>décorateurs</strong> permettant d’ajouter :</p>
+<ul>
+<li>la journalisation des messages envoyés,</li>
+<li>le chiffrement du contenu,</li>
+<li>la mesure du temps d’exécution.</li>
+</ul>
+</li>
+<li><p>Permettre au client de combiner librement ces fonctionnalités.</p>
+</li>
+<li><p>Vérifier que le client n’a pas besoin d’être modifié lorsque de nouvelles fonctionnalités sont ajoutées.</p>
+</li>
+</ol>
+<hr>
+<h2 id="contraintes">Contraintes</h2>
+<ul>
+<li>Le service de notification de base ne doit pas être modifié.</li>
+<li>Les fonctionnalités supplémentaires doivent être ajoutées dynamiquement.</li>
+<li>Le pattern <strong>Decorator</strong> doit être respecté.</li>
+<li>Le client doit manipuler un type unique représentant un service de notification.</li>
+</ul>
+
+		</body>
